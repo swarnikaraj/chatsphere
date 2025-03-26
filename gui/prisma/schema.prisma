@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL") // Ensure this is set in your .env file
+}
+
+
+
+model User {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String       @unique
+  password    String
+  faceId      String?
+  s3Key       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  userRooms   UserRoom[]   // Relation to UserRoom
+  messages    Message[]    // Relation to Message
+  invitations Invitation[] // Add this line for Invitation relation
+}
+
+model Room {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  userRooms   UserRoom[]   // Relation to UserRoom
+  messages    Message[]    // Relation to Message
+  invitations Invitation[] // Add this line for Invitation relation
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model UserRoom {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  roomId    String   @db.ObjectId
+  role      String   @default("user") // "admin" or "user"
+  user      User     @relation(fields: [userId], references: [id])
+  room      Room     @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Invitation {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  roomId    String   @db.ObjectId
+  userId    String   @db.ObjectId
+  status    String   @default("pending") // "pending", "accepted", "rejected"
+  room      Room     @relation(fields: [roomId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  senderId  String   @db.ObjectId
+  sender    User     @relation(fields: [senderId], references: [id])
+  roomId    String   @db.ObjectId
+  room      Room     @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+}
