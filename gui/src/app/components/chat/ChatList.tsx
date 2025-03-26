@@ -43,7 +43,7 @@ useEffect(() => {
       console.log('Setting up WebSocket for room:', roomId);
       
       // First identify the user
-      ws.identify(session.user.id);
+      ws.identify();
       
       // Then join the room
       if (!roomId) {
