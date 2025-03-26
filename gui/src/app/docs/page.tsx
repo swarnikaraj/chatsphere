@@ -202,7 +202,7 @@ export default function DocumentationPage() {
   <div className="bg-gray-50 p-4 rounded-lg">
     <h3 className="text-lg font-medium mb-3 text-gray-800">Prerequisites</h3>
     <p className="text-gray-700 mb-4">
-      Before running ChatSphere, you'll need to set up the following services:
+      Before running ChatSphere, you&apos;ll need to set up the following services:
     </p>
 
     <div className="space-y-6">
