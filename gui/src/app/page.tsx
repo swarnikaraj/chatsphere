@@ -11,7 +11,7 @@ export default function Home() {
             Documentation
           </Link>
           <Link 
-            href="https://github.com/swarnikaraj/ai-powered-chatapp" 
+            href="https://github.com/swarnikaraj/chatsphere" 
             target="_blank"
             className="text-gray-600 hover:text-indigo-600 transition-colors"
           >

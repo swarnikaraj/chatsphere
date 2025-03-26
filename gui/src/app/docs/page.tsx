@@ -14,7 +14,7 @@ export default function DocumentationPage() {
               Live Demo
             </Link>
             <Link 
-              href="https://github.com/swarnikaraj/ai-powered-chatapp" 
+              href="https://github.com/swarnikaraj/chatsphere"  
               target="_blank"
               className="text-gray-600 hover:text-indigo-600"
             >
@@ -79,7 +79,7 @@ export default function DocumentationPage() {
                   <Link href="/login">
                     <Button variant="primary">Get Started</Button>
                   </Link>
-                  <Link href="https://github.com/swarnikaraj/ai-powered-chatapp" target="_blank">
+                  <Link href="https://github.com/swarnikaraj/chatsphere" target="_blank">
                     <Button variant="outline">View on GitHub</Button>
                   </Link>
                 </div>
@@ -134,20 +134,10 @@ export default function DocumentationPage() {
                   <div id="speech-to-text" className="bg-gray-50 p-4 rounded-lg text-gray-700">
                     <h3 className="text-lg font-medium mb-3">Speech-to-Text</h3>
                     <p className="text-gray-700 mb-3">
-                      Users can dictate messages which are converted to text using the browser&apos;s
+                      Users can dictate messages which are converted to text using google
                       Speech Recognition API.
                     </p>
-                    <div className="flex items-center space-x-2">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                        Chrome
-                      </span>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                        Edge
-                      </span>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Firefox
-                      </span>
-                    </div>
+                 
                   </div>
 
                   <div id="group-chats" className="bg-gray-50 p-4 rounded-lg text-gray-700">
@@ -157,8 +147,8 @@ export default function DocumentationPage() {
                     </p>
                     <ul className="list-disc pl-6 space-y-1 ">
                       <li>Create groups with custom names</li>
-                      <li>Add/remove participants</li>
-                      <li>Admin controls for group owners</li>
+                      <li>Add/remove participants (Not implemented)</li>
+                      <li>Admin controls for group owners (Not implemented)</li>
                       <li>Message history persistence</li>
                     </ul>
                   </div>
@@ -181,7 +171,7 @@ export default function DocumentationPage() {
   "email": "user@example.com",
   "name": "John Doe",
   "password": "securepassword123",
-  "faceData": "base64encodedimage"
+  "faceImage": "base64encodedimage"
 }`}
                       </pre>
                     </div>
@@ -198,7 +188,7 @@ export default function DocumentationPage() {
                         {`{
   "email": "user@example.com",
   "password": "securepassword123",
-  "faceData": "base64encodedimage"
+  "faceImage": "base64encodedimage"
 }`}
                       </pre>
                     </div>
@@ -207,30 +197,114 @@ export default function DocumentationPage() {
               </section>
 
               <section id="getting-started" className="mb-12">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Getting Started</h2>
-                
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="text-lg font-medium mb-3 text-gray-800">Local Development</h3>
-                  <p className="text-gray-700 mb-4">
-                    To run ChatSphere locally, follow these steps:
-                  </p>
-                  <ol className="list-decimal pl-6 space-y-2 mb-4">
-                    <li className='text-gray-600'>Clone the repository</li>
-                    <li className='text-gray-600'>Install dependencies</li>
-                    <li className='text-gray-600'> Set up environment variables</li>
-                    <li className='text-gray-600'>Run the development server</li>
-                  </ol>
-                  <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
-                    <span className="text-green-400">$</span> git clone https://github.com/swarnikaraj/ai-powered-chatapp.git
-                    <br />
-                    <span className="text-green-400">$</span> cd chatapp
-                    <br />
-                    <span className="text-green-400">$</span> npm install
-                    <br />
-                    <span className="text-green-400">$</span> npm run dev
-                  </div>
-                </div>
-              </section>
+  <h2 className="text-2xl font-semibold mb-4 text-gray-800">Getting Started</h2>
+  
+  <div className="bg-gray-50 p-4 rounded-lg">
+    <h3 className="text-lg font-medium mb-3 text-gray-800">Prerequisites</h3>
+    <p className="text-gray-700 mb-4">
+      Before running ChatSphere, you'll need to set up the following services:
+    </p>
+
+    <div className="space-y-6">
+      {/* AWS Setup */}
+      <div>
+        <h4 className="font-medium text-gray-800 mb-2">1. AWS Rekognition Setup</h4>
+        <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-600">
+          <li>Create an AWS account at aws.amazon.com</li>
+          <li>Navigate to IAM and create a new user with Rekognition access</li>
+          <li>Save the AWS access key and secret key</li>
+          <li>Enable Rekognition service in your AWS console</li>
+        </ol>
+        <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+          <span className="text-yellow-400"># Add to your .env file</span><br />
+          AWS_ACCESS_KEY_ID=your_access_key<br />
+          AWS_SECRET_ACCESS_KEY=your_secret_key<br />
+          AWS_REGION=your_region
+        </div>
+      </div>
+
+      {/* GCP Setup */}
+      <div>
+        <h4 className="font-medium text-gray-800 mb-2">2. Google Cloud Platform Setup</h4>
+        <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-600">
+          <li>Create a GCP account at console.cloud.google.com</li>
+          <li>Create a new project</li>
+          <li>Navigate to IAM & Admin Service Accounts</li>
+          <li>Create a new service account and download the JSON key file</li>
+        </ol>
+        <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+          <span className="text-yellow-400"># Save the service account JSON as</span><br />
+          gcp-service-account.json
+        </div>
+      </div>
+
+      {/* Speech-to-Text Setup */}
+      <div>
+        <h4 className="font-medium text-gray-800 mb-2">3. Deploy Speech-to-Text Service</h4>
+        <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-600">
+          <li>Navigate to the speech-to-text folder</li>
+          <li>Deploy to GCP Cloud Functions using gcloud CLI</li>
+          <li>Copy the deployed function URL</li>
+        </ol>
+        <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+          <span className="text-green-400">$</span> cd speech-to-text<br />
+          <span className="text-green-400">$</span> gcloud functions deploy speechToText \<br />
+          &nbsp;&nbsp;--runtime nodejs18 \<br />
+          &nbsp;&nbsp;--trigger-http \<br />
+          &nbsp;&nbsp;--allow-unauthenticated
+        </div>
+      </div>
+
+      {/* WebSocket Server Setup */}
+      <div>
+        <h4 className="font-medium text-gray-800 mb-2">4. Deploy WebSocket Server</h4>
+        <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-600">
+          <li>Build Docker image for WebSocket server</li>
+          <li>Deploy to GCP Container Service</li>
+        </ol>
+        <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+          <span className="text-green-400">$</span> cd socket-server<br />
+          <span className="text-green-400">$</span> docker build -t websocket-server .<br />
+          <span className="text-green-400">$</span> docker tag websocket-server gcr.io/[PROJECT-ID]/websocket-server<br />
+          <span className="text-green-400">$</span> docker push gcr.io/[PROJECT-ID]/websocket-server<br />
+          <span className="text-green-400">$</span> gcloud run deploy websocket-server \<br />
+          &nbsp;&nbsp;--image gcr.io/[PROJECT-ID]/websocket-server \<br />
+          &nbsp;&nbsp;--platform managed
+        </div>
+      </div>
+    </div>
+
+    <h3 className="text-lg font-medium my-6 text-gray-800">Local Development</h3>
+    <p className="text-gray-700 mb-4">
+      After setting up all services, follow these steps to run ChatSphere locally:
+    </p>
+    <ol className="list-decimal pl-6 space-y-2 mb-4">
+      <li className='text-gray-600'>Clone the repository</li>
+      <li className='text-gray-600'>Install dependencies</li>
+      <li className='text-gray-600'>Set up environment variables</li>
+      <li className='text-gray-600'>Run the development server</li>
+    </ol>
+    <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+      <span className="text-green-400">$</span> git clone https://github.com/swarnikaraj/chatshpere.git<br />
+      <span className="text-green-400">$</span> cd gui<br />
+      <span className="text-green-400">$</span> cp example.env .env<br />
+      <span className="text-yellow-400"># Update .env with your service URLs and credentials</span><br />
+      <span className="text-green-400">$</span> npm install<br />
+      <span className="text-green-400">$</span> npm run dev
+    </div>
+
+    <div className="mt-6 bg-blue-50 p-4 rounded">
+      <h4 className="font-medium text-blue-800 mb-2">Important Environment Variables</h4>
+      <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
+        NEXT_PUBLIC_WEBSOCKET_URL=your_websocket_url<br />
+        NEXT_PUBLIC_SPEECH_TO_TEXT_URL=your_speech_to_text_url<br />
+        AWS_ACCESS_KEY_ID=your_aws_access_key<br />
+        AWS_SECRET_ACCESS_KEY=your_aws_secret_key<br />
+        GCP_PROJECT_ID=your_gcp_project_id
+      </div>
+    </div>
+  </div>
+</section>
             </div>
           </div>
         </div>
