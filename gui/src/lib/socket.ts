@@ -29,7 +29,7 @@ export class WebSocketService {
                 const data = JSON.parse(event.data) as WebSocketMessage;
                 this.handleMessage(data);
             } catch (error) {
-                console.error('Error parsing message:', error);
+                console.log('Error parsing message:', error);
             }
         };
 
@@ -39,7 +39,7 @@ export class WebSocketService {
         };
 
         this.ws.onerror = (error: Event) => {
-            console.error('WebSocket error:', error);
+            console.log('WebSocket error:', error);
         };
     }
 

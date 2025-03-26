@@ -61,7 +61,7 @@ export function ChatInput({ roomId ,updateChatHistory}: ChatInputProps){
             setMessage('');
             updateChatHistory(savedMessage);
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.log('Error sending message:', error);
         }
     };
 
@@ -128,7 +128,7 @@ export function ChatInput({ roomId ,updateChatHistory}: ChatInputProps){
             const data = await response.json();
             setMessage(data.text);
           } catch (error) {
-            console.error('Error sending audio:', error);
+            console.log('Error sending audio:', error);
             alert('Error transcribing audio. Please try again.');
           } finally {
             setIsProcessing(false);
@@ -140,8 +140,8 @@ export function ChatInput({ roomId ,updateChatHistory}: ChatInputProps){
       mediaRecorder.start();
       setIsRecording(true);
     } catch (error) {
-      console.error('Error accessing microphone:', error);
-      alert('Error accessing microphone. Please check permissions.');
+      console.log('Error accessing microphone:', error);
+      toast.error('Error accessing microphone. Please check permissions.');
     }
   };
 

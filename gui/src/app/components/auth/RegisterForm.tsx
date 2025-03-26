@@ -64,7 +64,7 @@ export function RegisterForm() {
         toast.error(`Registration failed: ${data.error}`);
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      console.log('Registration error:', error);
       toast.error('Registration failed: Internal server error');
     } finally {
       setIsLoading(false);

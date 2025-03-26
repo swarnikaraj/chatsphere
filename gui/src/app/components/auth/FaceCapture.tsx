@@ -42,7 +42,7 @@ export function FaceCapture({ onVerified, onCapture, mode , email}: FaceCaptureP
       
       setStream(mediaStream);
     } catch (err) {
-      console.error('Error accessing camera:', err);
+      console.log('Error accessing camera:', err);
     }
   };
 
@@ -106,7 +106,7 @@ export function FaceCapture({ onVerified, onCapture, mode , email}: FaceCaptureP
           onVerified(res.verified);
         }
       } catch (error) {
-        console.error('Face verification error:', error);
+        console.log('Face verification error:', error);
         setVerificationStatus('error');
         if (onVerified) {
           onVerified(false);
@@ -118,7 +118,7 @@ export function FaceCapture({ onVerified, onCapture, mode , email}: FaceCaptureP
         toast.error('User not found or face ID not available');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
       toast.error('Failed to fetch user data');
     } finally {
       // setIsLoading(false);

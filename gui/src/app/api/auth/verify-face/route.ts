@@ -78,7 +78,7 @@ export async function POST(req: Request) {
         });
 
     } catch (error) {
-        console.error('Face verification error:', error);
+        console.log('Face verification error:', error);
         return NextResponse.json(
             {
                 error: 'Face verification failed',

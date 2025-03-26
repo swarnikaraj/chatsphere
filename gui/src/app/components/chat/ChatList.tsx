@@ -29,7 +29,7 @@ export function ChatList() {
         const data = await response.json();
         setMessages(data.messages);
       } catch (error) {
-        console.error('Failed to fetch messages:', error);
+        console.log('Failed to fetch messages:', error);
       } finally {
         setLoading(false);
       }

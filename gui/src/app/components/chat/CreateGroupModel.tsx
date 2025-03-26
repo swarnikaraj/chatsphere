@@ -37,7 +37,7 @@ export function CreateGroupModal({ isOpen, onClose ,onGroupCreated}: CreateGroup
           toast.error("Something went wrong");
         }
       } catch (error) {
-        console.error('Failed to fetch users:', error);
+        console.log('Failed to fetch users:', error);
         toast.error("Failed to fetch users");
       } finally {
         setIsFetchingUsers(false);
@@ -87,7 +87,7 @@ export function CreateGroupModal({ isOpen, onClose ,onGroupCreated}: CreateGroup
       toast.success("Group created successfully");
       onClose();
     } catch (error) {
-      console.error('Error creating group:', error);
+      console.log('Error creating group:', error);
       toast.error("Failed to create group");
     } finally {
       setIsLoading(false);

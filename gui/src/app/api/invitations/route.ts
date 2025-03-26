@@ -58,10 +58,10 @@ export async function PATCH(request: NextRequest) {
         return NextResponse.json({ success: true });
     } catch (error) {
         if (error instanceof Error) {
-            console.error('Error updating invitation:', error.message);
+            console.log('Error updating invitation:', error.message);
             return NextResponse.json({ error: error.message }, { status: 500 });
         }
-        console.error('Unknown error:', error);
+        console.log('Unknown error:', error);
         return NextResponse.json({ error: 'Failed to update invitation' }, { status: 500 });
     }
 }

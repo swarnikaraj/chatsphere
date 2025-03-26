@@ -3,7 +3,8 @@
 import ChatHeader from '@/app/components/chat/ChatHeader';
 import { Sidebar } from '@/app/components/chat/Sidebar';
 
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 export default function ChatPage() {
    
  
@@ -41,6 +42,7 @@ export default function ChatPage() {
           </div>
         </div>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

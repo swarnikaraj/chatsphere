@@ -63,7 +63,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ room, invitations });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return NextResponse.json({ error: 'Failed to create room' }, { status: 500 });
     }
 }
@@ -120,7 +120,7 @@ export async function GET() {
 
         return NextResponse.json(roomsWithUnread);
     } catch (error) {
-        console.error('Error fetching rooms:', error);
+        console.log('Error fetching rooms:', error);
         return NextResponse.json({ error: 'Failed to fetch rooms' }, { status: 500 });
     }
 }

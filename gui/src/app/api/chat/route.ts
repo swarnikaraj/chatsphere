@@ -58,7 +58,7 @@ export async function GET(req: Request) {
 
         return NextResponse.json(chatDetails);
     } catch (error) {
-        console.error("Error fetching chat:", error);
+        console.log("Error fetching chat:", error);
         return NextResponse.json(
             { error: "Failed to fetch chat details" },
             { status: 500 }

@@ -74,8 +74,8 @@ export function LoginForm() {
         toast.error('Face verification failed.');
       }
     } catch (error) {
-      console.error('Face verification error:', error);
-      alert('Face verification failed: Internal server error');
+      console.log('Face verification error:', error);
+      toast.error('Face verification failed: Internal server error');
     } finally {
       setIsLoading(false);
     }

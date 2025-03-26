@@ -63,7 +63,7 @@ export function Sidebar() {
         });
       }
     } catch (error) {
-      console.error('Error fetching rooms:', error);
+      console.log('Error fetching rooms:', error);
     } finally {
       setIsLoading(false);
     }

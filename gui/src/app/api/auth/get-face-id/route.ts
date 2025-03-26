@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ faceId: user.faceId });
     } catch (error) {
-        console.error('Error fetching face ID:', error);
+        console.log('Error fetching face ID:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

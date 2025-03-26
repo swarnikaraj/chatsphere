@@ -7,6 +7,8 @@ import ChatHeader from '@/app/components/chat/ChatHeader';
 import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export default function ChatPage() {
   const params = useParams();
@@ -44,6 +46,7 @@ export default function ChatPage() {
           <ChatList />
         </div>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

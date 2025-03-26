@@ -57,7 +57,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatId }) => {
                 const data = await response.json();
                 setChatDetails(data);
             } catch (error) {
-                console.error("Error fetching chat details:", error);
+                console.log("Error fetching chat details:", error);
                 toast.error(error instanceof Error ? error.message : "Failed to load chat details");
             } finally {
                 setLoading(false);
