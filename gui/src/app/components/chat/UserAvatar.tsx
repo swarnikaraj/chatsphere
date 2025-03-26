@@ -12,7 +12,7 @@ export function UserAvatar({ name, initials }: UserAvatarProps) {
   };
 
   return (
-    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-800 font-medium text-sm">
+    <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-800 font-medium text-sm">
       {getInitials()}
     </div>
   );

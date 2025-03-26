@@ -9,6 +9,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import MobileMenu from '@/app/components/chat/MobileSidebar';
 
 export default function ChatPage() {
   const params = useParams();
@@ -39,7 +40,11 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar />
+      <div className="hidden lg:block ">
+          <Sidebar />
+        </div>
+
+     <MobileMenu />
       <div className="flex flex-col flex-1">
         <ChatHeader chatId={chatId} />
         <div className="flex-1 overflow-hidden">

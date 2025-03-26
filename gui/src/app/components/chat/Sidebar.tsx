@@ -90,7 +90,7 @@ export function Sidebar() {
 
   return (
     <>
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col text-gray-700">
+      <div className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col text-gray-700">
         <div className="p-4 border-b border-gray-200">
           <h2 className="text-xl font-semibold">Chats</h2>
         </div>
@@ -154,6 +154,7 @@ export function Sidebar() {
               <p className="text-sm font-medium text-gray-900">
                 {session?.user?.name}
               </p>
+                 <p className="text-xs text-gray-900">{session?.user?.email}</p>
               <p className="text-xs text-gray-500">Online</p>
             </div>
           </div>

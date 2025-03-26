@@ -1,4 +1,4 @@
-// components/chat/ChatHeader.tsx
+
 'use client';
 
 import { UserAvatar } from "./UserAvatar";
@@ -103,7 +103,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatId }) => {
         <UserAvatar 
           name={chatDetails?.name || "General Chat"} 
         />
-        <div className="ml-3">
+        <div className="ml-3 hidden lg:block xl:block">
           {renderChatInfo()}
         </div>
       </div>
@@ -112,11 +112,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chatId }) => {
       <div className="flex items-center space-x-4">
         {/* User info */}
         {session?.user && (
-          <div className="flex items-center space-x-3">
-            <div className="text-right">
-              <p className="text-sm font-medium">{session.user.name}</p>
-              <p className="text-xs text-gray-500">{session.user.email}</p>
-            </div>
+          <div className="flex items-center space-x-3 ">
+            
             {session.user.image ? (
               <Image
                 src={session.user.image}

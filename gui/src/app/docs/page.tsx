@@ -127,7 +127,7 @@ export default function DocumentationPage() {
                         
                         {/* Example WebSocket connection code */}
                       <br />
-                      const socket = new WebSocket(&apos;wss://api.chatsphere.com/ws&apos;);
+                      const socket = new WebSocket(&apos;ws://socketserver-production-7cc8.up.railway.app/ws&apos;);
                     </div>
                   </div>
 
