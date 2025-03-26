@@ -7,7 +7,7 @@ export class WebSocketService {
     private maxReconnectAttempts = 5;
     private reconnectTimeout: NodeJS.Timeout | null = null;
     private messageHandlers: Map<string, Set<MessageHandler>> = new Map();
-
+    public onConnectionChange?: (connected: boolean) => void;
     constructor(private userId: string) { }
 
     connect(): void {
@@ -20,7 +20,7 @@ export class WebSocketService {
 
         this.ws.onopen = () => {
             console.log('Connected to WebSocket');
-            this.reconnectAttempts = 0;
+            this.onConnectionChange?.(true);
             this.identify();
         };
 
@@ -35,6 +35,7 @@ export class WebSocketService {
 
         this.ws.onclose = () => {
             console.log('WebSocket connection closed');
+            this.onConnectionChange?.(false);
             this.handleReconnect();
         };
 
@@ -43,6 +44,7 @@ export class WebSocketService {
         };
     }
 
+    // src/lib/socket.ts
     private handleReconnect(): void {
         if (this.reconnectTimeout) {
             clearTimeout(this.reconnectTimeout);
@@ -50,10 +52,12 @@ export class WebSocketService {
 
         if (this.reconnectAttempts < this.maxReconnectAttempts) {
             this.reconnectAttempts++;
+            const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), 30000);
+
             this.reconnectTimeout = setTimeout(() => {
                 console.log(`Attempting to reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
                 this.connect();
-            }, 1000 * Math.pow(2, this.reconnectAttempts));
+            }, delay);
         }
     }
 

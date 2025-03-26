@@ -1,52 +1,36 @@
 // src/providers/WebSocketProvider.tsx
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { WebSocketContext } from '@/context/WebSocketContext';
 import { WebSocketService } from '@/lib/socket';
 import { useSession } from 'next-auth/react';
 
-interface WebSocketProviderProps {
-  children: ReactNode;
-}
-
-export function WebSocketProvider({ children }: WebSocketProviderProps) {
-  const { data: session, status } = useSession();
-  const [wsState, setWsState] = useState<{
-    ws: WebSocketService | null;
-    isConnected: boolean;
-  }>({
-    ws: null,
-    isConnected: false,
-  });
+export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [ws, setWs] = useState<WebSocketService | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
-    let wsService: WebSocketService | null = null;
-
-    if (status === 'authenticated' && session?.user?.id) {
-      wsService = new WebSocketService(session.user.id);
-      wsService.connect();
+    if (session?.user?.id) {
+      const wsService = new WebSocketService(session.user.id);
       
-      setWsState({
-        ws: wsService,
-        isConnected: true,
-      });
-    }
+      wsService.onConnectionChange = (connected: boolean) => {
+        setIsConnected(connected);
+      };
 
-    return () => {
-      if (wsService) {
+      wsService.connect();
+      setWs(wsService);
+
+      return () => {
         wsService.disconnect();
-        setWsState({
-          ws: null,
-          isConnected: false,
-        });
-      }
-    };
-  }, [session?.user?.id, status]);
+      };
+    }
+  }, [session?.user?.id]);
 
   return (
-    <WebSocketContext.Provider value={wsState}>
+    <WebSocketContext.Provider value={{ ws, isConnected }}>
       {children}
     </WebSocketContext.Provider>
   );
-}
+};

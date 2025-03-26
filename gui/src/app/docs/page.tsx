@@ -264,6 +264,8 @@ export default function DocumentationPage() {
         </ol>
         <div className="bg-gray-800 text-white p-3 rounded font-mono text-sm overflow-x-auto">
           <span className="text-green-400">$</span> cd socket-server<br />
+         <span className="text-green-400">$</span> docker build -t websocket-server docker-compose up -d<br />
+          <span className="text-green-400">$</span> docker build -t websocket-server OR<br />
           <span className="text-green-400">$</span> docker build -t websocket-server .<br />
           <span className="text-green-400">$</span> docker tag websocket-server gcr.io/[PROJECT-ID]/websocket-server<br />
           <span className="text-green-400">$</span> docker push gcr.io/[PROJECT-ID]/websocket-server<br />

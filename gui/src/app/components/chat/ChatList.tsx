@@ -8,6 +8,7 @@ import { useWebSocket } from '@/context/WebSocketContext';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { ChatInput } from './ChatInput';
+import { toast } from 'react-toastify';
 
 export function ChatList() {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -21,7 +22,8 @@ export function ChatList() {
     setMessages(prev => [...prev, newMessage]);
   };
 
-  useEffect(() => {
+  // src/components/chat/ChatList.tsx
+useEffect(() => {
     async function fetchMessages() {
       try {
         const response = await fetch(`/api/messages?roomId=${roomId}`);
@@ -29,7 +31,7 @@ export function ChatList() {
         const data = await response.json();
         setMessages(data.messages);
       } catch (error) {
-        console.log('Failed to fetch messages:', error);
+        console.error('Failed to fetch messages:', error);
       } finally {
         setLoading(false);
       }
@@ -37,21 +39,51 @@ export function ChatList() {
 
     fetchMessages();
 
-    if (ws) {
+    if (ws && session?.user?.id) {
+      console.log('Setting up WebSocket for room:', roomId);
+      
+      // First identify the user
+      ws.identify(session.user.id);
+      
+      // Then join the room
+      if (!roomId) {
+        toast.error("room Id not found")
+        
+      }
+  console.log(roomId,"roomId")
+      ws.joinRoom(roomId);
+      
       const handleNewMessage = (data: WebSocketMessage) => {
+        console.log('Received new message in ChatList:', data);
         if (data.type === 'new-message' && data.roomId === roomId && data.message) {
-          updateChatHistory(data.message);
+          console.log('Adding message to chat:', data.message);
+          const newMessage: ChatMessageType = {
+            id: data.message.id || Date.now().toString(),
+            content: data.message.content,
+            senderId: data.message.senderId,
+            sender: data.message.sender,
+            roomId: data.message.roomId,
+            createdAt: new Date(data.message.createdAt)
+          };
+          
+          setMessages(prev => {
+            console.log('Previous messages:', prev);
+            const updated = [...prev, newMessage];
+            console.log('Updated messages:', updated);
+            return updated;
+          });
         }
       };
 
+      console.log('Adding message handler for room:', roomId);
       ws.addEventListener('new-message', handleNewMessage);
-      ws.joinRoom(roomId);
 
       return () => {
+        console.log('Removing message handler for room:', roomId);
         ws.removeEventListener('new-message', handleNewMessage);
       };
     }
-  }, [roomId, ws]);
+  }, [roomId, ws, session]);
 
   if (loading) {
     return <ChatSkeleton />;
