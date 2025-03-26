@@ -13,8 +13,6 @@ A full-stack real-time chat application that provides secure authentication usin
 - [WebSocket Server Details](#websocket-server-details)
 - [API Endpoints & Routes](#api-endpoints--routes)
 - [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 
