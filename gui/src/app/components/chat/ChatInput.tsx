@@ -10,11 +10,10 @@ import { toast } from 'react-toastify';
 
 interface ChatInputProps {
     roomId: string;
-    updateChatHistory: (message: ChatMessage) => void;
 }
 
 
-export function ChatInput({ roomId ,updateChatHistory}: ChatInputProps){
+export function ChatInput({ roomId}: ChatInputProps){
   const [message, setMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -52,14 +51,14 @@ export function ChatInput({ roomId ,updateChatHistory}: ChatInputProps){
             ws.sendMessage(roomId, newMessage);
            
             // Save to database
-           const response= await fetch('/api/messages', {
+           await fetch('/api/messages', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newMessage),
             });
-           const { message: savedMessage } = await response.json();
+          
             setMessage('');
-            updateChatHistory(savedMessage);
+            
         } catch (error) {
             console.log('Error sending message:', error);
         }

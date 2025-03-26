@@ -18,9 +18,7 @@ export function ChatList() {
   const params = useParams();
   const roomId = params.id as string;
 
-  const updateChatHistory = (newMessage: ChatMessageType) => {
-    setMessages(prev => [...prev, newMessage]);
-  };
+ 
 
   // src/components/chat/ChatList.tsx
 useEffect(() => {
@@ -110,7 +108,7 @@ useEffect(() => {
         )}
       </div>
       <div className="border-t border-gray-200 p-4 bg-white">
-        <ChatInput roomId={roomId} updateChatHistory={updateChatHistory} />
+        <ChatInput roomId={roomId}/>
       </div>
     </div>
   );
